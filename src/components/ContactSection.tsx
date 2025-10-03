@@ -1,11 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, Instagram, MapPin, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    institution: '',
+    message: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+
+    emailjs
+      .send(
+        'service_vlhxet2', // 🔹 Replace with your EmailJS service ID
+        'template_69zy9ed', // 🔹 Replace with your EmailJS template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          institution: formData.institution,
+          message: formData.message,
+        },
+        'KF1P3eRAN36ByAudp' // 🔹 Replace with your EmailJS public key
+      )
+      .then(
+        () => {
+          setStatus('success');
+          setFormData({ name: '', email: '', institution: '', message: '' });
+        },
+        (error) => {
+          console.error(error);
+          setStatus('error');
+        }
+      )
+      .finally(() => setLoading(false));
+  };
+
   return (
     <section id="contact" className="section bg-gradient-to-br from-gray-900 to-blue-900 py-16">
       <div className="container mx-auto px-4">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -20,7 +66,9 @@ const ContactSection = () => {
           </p>
         </motion.div>
 
+        {/* Contact Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -47,17 +95,17 @@ const ContactSection = () => {
                     <p className="text-gray-300">+91 7904912485</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="mt-1 mr-4">
                     <Mail className="text-blue-400" size={20} />
                   </div>
                   <div>
                     <h4 className="font-medium text-gray-200">Email</h4>
-                    <p className="text-gray-300">harxshkumar271199@gmail.com</p>
+                    <p className="text-gray-300">service@harivendingmachineservices.com</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="mt-1 mr-4">
                     <MapPin className="text-blue-400" size={20} />
@@ -67,31 +115,20 @@ const ContactSection = () => {
                     <p className="text-gray-300">Chennai, Tamil Nadu, India</p>
                   </div>
                 </div>
-                
-                <div className="flex items-start">
-                  {/* <div className="mt-1 mr-4">
-                    <Instagram className="text-blue-400" size={20} />
-                  </div> */}
-                  {/* <div>
-                    <h4 className="font-medium text-gray-200">Instagram</h4>
-                    <a href="https://instagram.com/hvms_official" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
-                      @hvms_official
-                    </a>
-                  </div> */}
-                </div>
               </div>
             </div>
           </motion.div>
 
+          {/* Right Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <form className="bg-gray-800 rounded-xl shadow-lg p-6">
+            <form onSubmit={handleSubmit} className="bg-gray-800 rounded-xl shadow-lg p-6">
               <h3 className="text-xl font-semibold mb-6 text-white">Send us a message</h3>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
@@ -100,11 +137,14 @@ const ContactSection = () => {
                   <input
                     type="text"
                     id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all bg-gray-700 text-white placeholder-gray-400"
                     placeholder="Your name"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
                     Email
@@ -112,12 +152,15 @@ const ContactSection = () => {
                   <input
                     type="email"
                     id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all bg-gray-700 text-white placeholder-gray-400"
                     placeholder="Your email"
                   />
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <label htmlFor="institution" className="block text-sm font-medium text-gray-300 mb-1">
                   Institution Name
@@ -125,11 +168,14 @@ const ContactSection = () => {
                 <input
                   type="text"
                   id="institution"
+                  value={formData.institution}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all bg-gray-700 text-white placeholder-gray-400"
                   placeholder="Your institution name"
                 />
               </div>
-              
+
               <div className="mb-6">
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
                   Message
@@ -137,18 +183,33 @@ const ContactSection = () => {
                 <textarea
                   id="message"
                   rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all bg-gray-700 text-white placeholder-gray-400"
                   placeholder="Tell us about your requirements"
                 ></textarea>
               </div>
-              
+
               <button
                 type="submit"
-                className="w-full btn bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center transition-colors duration-300"
+                disabled={loading}
+                className="w-full btn bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center transition-colors duration-300 disabled:opacity-70"
               >
-                <Send size={18} className="mr-2" />
-                Send Message
+                {loading ? 'Sending...' : (
+                  <>
+                    <Send size={18} className="mr-2" />
+                    Send Message
+                  </>
+                )}
               </button>
+
+              {status === 'success' && (
+                <p className="mt-4 text-green-400">Message sent successfully!</p>
+              )}
+              {status === 'error' && (
+                <p className="mt-4 text-red-400">Something went wrong. Please try again.</p>
+              )}
             </form>
           </motion.div>
         </div>
