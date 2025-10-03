@@ -14,10 +14,7 @@ const galleryImages = [
     id: 103,
     url: 'https://i.postimg.cc/NGp4Vxzh/Whats-App-Image-2025-10-03-at-12-11-31-AM.jpg',
   },
-  {
-    id: 104,
-    url: 'https://i.postimg.cc/Hsn2C7q2/Whats-App-Image-2025-10-03-at-12-11-32-AM.jpg',
-  },
+
   {
     id: 1,
     url: 'https://i.postimg.cc/RhXRc309/Whats-App-Image-2025-05-19-at-9-10-28-AM.jpg',
