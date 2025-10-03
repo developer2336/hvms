@@ -5,6 +5,7 @@ const ClientSection = () => {
   return (
     <section id="clients" className="section bg-gradient-to-br from-gray-900 to-blue-900 py-16">
       <div className="container mx-auto px-4">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -12,32 +13,59 @@ const ClientSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our Valued Client</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our Valued Clients</h2>
           <div className="w-24 h-1 bg-blue-400 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto text-lg text-gray-300">
-            We are proud to partner with leading institutions to enhance their workplace experience.
+            We are proud to partner with leading institutions and enterprises, helping them enhance operations and deliver impactful experiences.
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="flex justify-center"
-        >
-          <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center max-w-sm w-full border border-gray-700/50">
-            <img
-              src="data:image/jpeg;base64,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"
-              alt="M.O.P. Vaishnav College Logo"
-              className="w-32 h-32 object-contain mb-4 rounded-full border-2 border-blue-400"
-            />
-            <h3 className="text-xl font-semibold text-white">M.O.P. Vaishnav College</h3>
-            <p className="text-gray-300 text-center mt-2">
-              A prestigious institution in Chennai, partnering with HVMS to provide convenient refreshment solutions for students and staff.
-            </p>
-          </div>
-        </motion.div>
+        {/* Clients Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center items-center">
+          {/* Client 1: M.O.P. Vaishnav College */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex justify-center"
+          >
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center max-w-sm w-full border border-gray-700/50">
+              <img
+                src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCE..." 
+                alt="M.O.P. Vaishnav College Logo"
+                className="w-32 h-32 object-contain mb-4 rounded-full border-2 border-blue-400"
+              />
+              <h3 className="text-xl font-semibold text-white">M.O.P. Vaishnav College</h3>
+              <p className="text-gray-300 text-center mt-2">
+                A prestigious institution in Chennai, partnering with HVMS to provide convenient refreshment solutions for students and staff.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Client 2: Solverminds */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex justify-center"
+          >
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center max-w-sm w-full border border-gray-700/50">
+              <img
+                src="https://media.licdn.com/dms/image/v2/C4E0BAQHM3unbkM34eA/company-logo_200_200/company-logo_200_200/0/1631353033655?e=2147483647&v=beta&t=5jbL_4MjiyBz1fKN96ZXDezvnr-0tfOVbk3s0TK76ss"
+                alt="Solverminds Logo"
+                className="w-32 h-32 object-contain mb-4 rounded-full border-2 border-blue-400"
+              />
+              <h3 className="text-xl font-semibold text-white">Solverminds</h3>
+              <p className="text-gray-300 text-center mt-2">
+                Solverminds is a leading solution provider for the liner shipping industry, delivering
+                expertise in liner operations, ship management, and logistics optimization. 
+                We partnered with them to implement cutting-edge services that streamline global maritime operations.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
