@@ -61,7 +61,7 @@ const ClientSection = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-white">Solverminds</h3>
+              <h3 className="text-xl font-semibold text-white">Solverminds Solutions And Technologies</h3>
               <p className="text-gray-300 text-center mt-2">
                 Solverminds is a leading solution provider for the liner shipping industry, delivering
                 expertise in liner operations, ship management, and logistics optimization. 
