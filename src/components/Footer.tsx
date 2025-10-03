@@ -21,7 +21,7 @@ const Footer = () => {
                 <Instagram size={20} />
               </a>
               <a 
-                href="mailto:harxshkumar271199@gmail.com" 
+                href="mailto:service@harivendingmachineservices.com" 
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 <Mail size={20} />
@@ -70,8 +70,8 @@ const Footer = () => {
                 </a>
               </p>
               <p>
-                <a href="mailto:harxshkumar271199@gmail.com" className="hover:text-white transition-colors">
-                  harxshkumar271199@gmail.com
+                <a href="mailto:service@harivendingmachineservices.com" className="hover:text-white transition-colors">
+                  service@harivendingmachineservices.com
                 </a>
               </p>
             </address>
